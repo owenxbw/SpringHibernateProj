@@ -1,14 +1,14 @@
-package com.Leo.create;
+package com.Leo.CRUD;
 
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.Leo.entity.Student;
+import com.Leo.Entity.Student;
 
-public class createStudent {
-
+public class UpdateStudent {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		SessionFactory factory = new Configuration()
@@ -20,14 +20,14 @@ public class createStudent {
 		Session session = factory.getCurrentSession();
 		
 		try {
-			// create student object
-			Student std = new Student("Leo","James","JamesL@gamil.com");
-			
+
 			//start transaction
 			session.beginTransaction();
 			
-			//save the student
-			session.save(std);
+			int studentId = 2;
+			Student std = session.get(Student.class, studentId);
+			
+			std.setFirstName("Peter");
 			
 			//commit transaction
 			session.getTransaction().commit();
@@ -37,5 +37,4 @@ public class createStudent {
 			factory.close();
 		}
 	}
-
 }
